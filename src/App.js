@@ -1,16 +1,28 @@
-import React, {useState}from 'react';
+import React, {useState, useEffect}from 'react';
 import './App.css';
 
 
 function App() {
   
   const [contador,setContador] = useState(0);
-  const [tech,setTech] = useState([
-    'Nodejs',
-    'Reactjs'
-  ])
+  const [tech,setTech] = useState([]);
 
   const [input,setIput] = useState('');
+
+
+
+  useEffect(()=> {
+    const techStorage = localStorage.getItem('tech');
+
+    if(techStorage){
+      setTech(JSON.parse(techStorage))
+    }
+
+  },[])
+
+  useEffect(()=> {
+    localStorage.setItem('tech', JSON.stringify(tech));
+  },[tech])
 
 
   function addNumber(){
@@ -61,7 +73,7 @@ function App() {
 
      <input type="text" value={input} onChange={addInput}/>
      
-     <button onClick={addTech}>
+      <button onClick={addTech}>
           adcionar tech
       </button>
 
