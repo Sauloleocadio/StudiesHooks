@@ -27,6 +27,7 @@ function App() {
   }
 
   function addTech(){
+
     setTech([...tech ,input ])
     setIput('')
   }
