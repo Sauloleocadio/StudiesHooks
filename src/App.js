@@ -1,24 +1,72 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState}from 'react';
 import './App.css';
 
+
 function App() {
+  
+  const [contador,setContador] = useState(0);
+  const [tech,setTech] = useState([
+    'Nodejs',
+    'Reactjs'
+  ])
+
+  const [input,setIput] = useState('');
+
+
+  function addNumber(){
+    setContador(contador +1);
+  }
+
+  function deleteNumber(){
+    if(contador === 0) {
+      alert('Chegou a zero');
+    }else{
+      setContador(contador - 1);
+    }
+
+  }
+
+  function addTech(){
+    setTech([...tech ,input ])
+    setIput('')
+  }
+
+  function addInput(e) {
+   setIput(e.target.value)
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>You clicked {contador} times</p>
+      <button onClick={addNumber}>
+          Aumentar
+      </button>
+      <button onClick={deleteNumber}>
+          diminuir
+      </button>
+
+     <div>
+
+     <ul>
+        {tech.map(tech => (
+         <li 
+         key={tech}
+         >
+          {tech}
+         </li>
+       ))}
+     </ul>
+
+     <input type="text" value={input} onChange={addInput}/>
+     
+     <button onClick={addTech}>
+          adcionar tech
+      </button>
+
+     </div>
+
+
     </div>
   );
 }
